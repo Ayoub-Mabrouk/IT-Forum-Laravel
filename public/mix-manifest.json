@@ -1,4 +1,12 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/main.js": "/js/main.js",
+    "/js/loading_img.js": "/js/loading_img.js",
+    "/css/dashboard.css": "/css/dashboard.css",
+    "/css/profile.css": "/css/profile.css",
+    "/css/upgrade.css": "/css/upgrade.css",
+    "/css/verify.css": "/css/verify.css",
+    "/css/login_register.css": "/css/login_register.css",
+    "/css/welcome.css": "/css/welcome.css",
+    "/css/user.css": "/css/user.css",
+    "/css/question.css": "/css/question.css"
 }

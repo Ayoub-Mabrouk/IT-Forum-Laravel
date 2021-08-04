@@ -1,0 +1,77 @@
+@import "../Abstracts/variables";
+@import "../Abstracts/placeholders";
+@import "../Abstracts/responsive-rules";
+@import "../Abstracts/mixins";
+@import "../Base/base";
+@import "../Base/reset";
+@import "../Base/typography";
+@import "../Base/utilities";
+@import "../Components/forms";
+@import "../Components/Post";
+@import "../Layout/navbar";
+@import "../Layout/footer";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+img {
+    height: 40px;
+}
+li, a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+}
+
+.navlinks{
+    list-style: none;
+    li{
+        display: inline-block;
+        padding: 0px 10px;
+        a{
+            transition: all 0.3s ease 0s;
+        &:hover{
+                color: #0088A9;
+            }
+        }
+    }
+}
+
+body {
+  width: 100vw;
+  overflow: hidden;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.main {
+    background-color: rgb(187, 184, 184);
+  padding: 2rem;
+  overflow-y: visible;
+  overflow-x:hidden;
+  border-radius: 15px;
+  margin: 2.5rem auto;
+  box-shadow:0 0 15px $gray_color_1;
+  display: flex;
+  align-items: center;
+  row-gap:2rem;
+  flex-direction: column;
+//   justify-content: stretch;
+  height: 90%;
+  width: 60%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+    &>a {
+        color: unset;
+    }
+}

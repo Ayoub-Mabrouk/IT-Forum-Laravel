@@ -1,41 +1,60 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-<main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
-    <div class="flex">
-        <div class="w-full">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            @if (session('resent'))
-            <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100  px-3 py-4 mb-4"
-                role="alert">
-                {{ __('A fresh verification link has been sent to your email address.') }}
-            </div>
-            @endif
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Verify Your Email Address') }}
-                </header>
+{{--    <!-- Scripts -->--}}
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 
-                <div class="w-full flex flex-wrap text-gray-700 leading-normal text-sm p-6 space-y-4 sm:text-base sm:space-y-6">
-                    <p>
-                        {{ __('Before proceeding, please check your email for a verification link.') }}
-                    </p>
+<!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-                    <p>
-                        {{ __('If you did not receive the email') }}, <a
-                            class="text-blue-500 hover:text-blue-700 no-underline hover:underline cursor-pointer"
-                            onclick="event.preventDefault(); document.getElementById('resend-verification-form').submit();">{{ __('click here to request another') }}</a>.
-                    </p>
+    <!-- Styles -->
+    <link href="{{ asset('css/verify.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="main_content">
 
-                    <form id="resend-verification-form" method="POST" action="{{ route('verification.resend') }}"
-                        class="hidden">
-                        @csrf
-                    </form>
-                </div>
+    @if (session('resent'))
+        <lord-icon
+            src="https://cdn.lordicon.com//lupuorrc.json"
+            trigger="loop"
+            colors="primary:#121331,secondary:#13b5ea"
+            style="width:250px;height:250px">
+        </lord-icon>
+        <h2>{{__('Please check your email, and verify your account')}}</h2>
 
-            </section>
+        <div class="alert alert-success" role="alert">
+            {{ __('A fresh verification link has been sent to your email address.') }}
         </div>
-    </div>
-</main>
-@endsection
+    @else
+
+        <lord-icon
+            src="https://cdn.lordicon.com//tyounuzx.json"
+            trigger="loop"
+            colors="primary:#121331,secondary:#13b5ea"
+            style="width:250px;height:250px">
+        </lord-icon>
+        <h2>{{__('Please check your email, and verify your account')}}</h2>
+
+        <div class="message">
+            <div>{{ __('Before proceeding, please check your email for a verification link.') }}</div>
+            <div>{{ __('If you did not receive the email') }}</div>
+        </div>
+    @endif
+    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+        @csrf
+        <button type="submit">{{ __('click here to request another') }}</button>
+    </form>
+
+</div>
+<script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+</body>
+</html>

@@ -1,25 +1,26 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuestionsController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
-Route::get('/questions',[QuestionsController::class,'index']);
+
 Auth::routes();
-
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Route::get('/dashboard', [App\Http\Controllers\Questions::class, 'all'])->middleware('auth')
+    ->name('dashboard');
+Route::get('/question/{id}', [App\Http\Controllers\Questions::class, 'question'])->middleware('auth')->where('id', '[0-9]+');
+Route::get('/logout', [App\Http\Controllers\User::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/delete/{id}', [App\Http\Controllers\User::class, 'delete'])->middleware('auth')->where('id', '[0-9]+');
+Route::post('/add_comments/{id}', [App\Http\Controllers\Questions::class, 'add_comments'])->middleware('auth')->where('id', '[0-9]+');
+Route::get('/add', [App\Http\Controllers\Questions::class, 'newQuestion'])->middleware('auth')->name('add');
+Route::post('/newQuestion', [App\Http\Controllers\Questions::class, 'add'])->middleware('auth')->name('addQuestion');
+Route::get('/questions/{id}', [App\Http\Controllers\Questions::class, 'QuestionsUser'])->middleware('auth')->where('id', '[0-9]+');
+Route::get('/question_delete/{id}', [App\Http\Controllers\Questions::class, 'deleteQuestion'])->middleware('auth')->where('id', '[0-9]+');
+Route::get('/admin', function () {
+    if (Auth::user()->permission) {
+        return view('user.admin',['users'=>DB::table('users')->get()]);
+    };
+});
